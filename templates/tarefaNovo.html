@@ -1,0 +1,17 @@
+﻿<form class="form-horizontal" name="novaTarefa" ng-submit="tarefaControle.addTarefa(tarefaControle.tarefa, tarefaControle.currentShow, tarefaControle.myDate)">
+    <div class="form-group">
+        <label for="inputTarefa" class="col-xs-1 control-label">Tarefa</label>
+        <div class="col-md-8 col-xs-12">
+            <input type="text" class="form-control" id="inputTarefa" ng-model="tarefaControle.tarefa" placeholder="Nova Tarefa" required="" />
+            <p class="input-group">
+                <md-datepicker ng-model="tarefaControle.myDate" md-placeholder="Enter date"></md-datepicker>
+            </p>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-1 col-md-8 col-xs-12">
+            <input class="btn btn-primary" type="submit" value="add" />
+            <a class="btn btn-primary" ui-sref="categoria.lista({listaId:0})">Cancelar</a>
+        </div>
+    </div>
+</form>

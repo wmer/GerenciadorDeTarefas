@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html ng-app="gerenciadorTarefasApp" lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Gerenciador de Tarefas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/angular-material.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+<body>
+    <modal></modal>
+    <tarefa-rapida></tarefa-rapida>
+<!--corpo site-->
+<div ui-view>
+
+</div>
+<!--fim corpo site-->
+<!--scripts-->
+<script type="text/javascript" src="js/lib/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="js/lib/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="js/lib/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/lib/jquery.ui.touch-punch.min.js"></script>
+<script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/lib/angular.min.js"></script>
+<script type="text/javascript" src="js/lib/angular-aria.min.js"></script>
+<script type="text/javascript" src="js/lib/angular-local-storage.min.js"></script>
+<script type="text/javascript" src="js/lib/angular-animate.min.js"></script>
+<script type="text/javascript" src="js/lib/angular-material.min.js"></script>
+<script type="text/javascript" src="js/lib/ui-bootstrap-tpls-0.13.4.min.js"></script>
+<script type="text/javascript" src="js/lib/angular-ui-router.min.js"></script>
+<script type="text/javascript" src="js/lib/sortable.js"></script>
+<script type="text/javascript" src="js/servicos/dataHoraService.js"></script>
+<script type="text/javascript" src="js/servicos/gerenciadorUsuarioService.js"></script>
+<script type="text/javascript" src="js/servicos/gerenciadorTarefasService.js"></script>
+<script type="text/javascript" src="js/rotas.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/gerenciadorTarefasController.js"></script>
+<script type="text/javascript" src="js/diretivas/Elementos.js"></script>
+</body>
+</html>

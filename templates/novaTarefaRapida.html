@@ -1,0 +1,39 @@
+﻿<!-- Modal -->
+<!--login-->
+<div class="modal fade" id="novaTarefaRapida" tabindex="-1" role="dialog" aria-labelledby="novaTarefaRapidaLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Nova Tarefa</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal login_estrut" name="novaTarefa" ng-submit="tarefaControle.addTarefaRapida(tarefaControle.tarefa, tarefaControle.categoria)">
+                    <div class="form-group">
+                        <label for="inputTarefa" class="col-xs-2 control-label">Tarefa</label>
+                        <div class="col-md-6 col-xs-12">
+                            <input type="text" class="form-control" id="inputTarefa" ng-model="tarefaControle.tarefa" placeholder="Nova Tarefa" required="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputCategoria" class="col-xs-2 control-label">Categoria</label>
+                        <div class="col-md-6 col-xs-12">
+                            <select name="cats" class="form-control"
+                                    ng-options="categoria.categorias for categoria in tarefaControle.user[tarefaControle.usuarioAtual].tarefas"
+                                    ng-model="tarefaControle.categoria" required="">
+                                <option value=''>-- Selecione uma categoria --</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-6 col-xs-12">
+                            <input class="btn btn-primary" type="submit" value="add" />
+                            <a class="btn btn-primary" data-dismiss="modal">Cancelar</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--fim login-->
+<!--fim Modal-->

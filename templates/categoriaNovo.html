@@ -1,0 +1,14 @@
+﻿<form class="form-horizontal login_estrut" name="novaCategoria" ng-submit="categoriaControle.addCategoria(categoriaControle.categoria)">
+    <div class="form-group">
+        <label for="inputTarefa" class="col-xs-2 control-label">Categoria</label>
+        <div class="col-md-8 col-xs-12">
+            <input type="text" class="form-control" id="inputTarefa" ng-model="categoriaControle.categoria" placeholder="Nova Categoria" required="" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-8 col-xs-12">
+            <input class="btn btn-primary" type="submit" value="add" />
+            <a class="btn btn-primary" ui-sref="categoria.lista({listaId:0})" value="add">Cancelar</a>
+        </div>
+    </div>
+</form>

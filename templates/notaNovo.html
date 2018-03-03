@@ -1,0 +1,16 @@
+﻿<form class="form-horizontal" name="novaNota" ng-submit="tarefaControle.addNota(tarefaControle.nota)">
+    <div class="form-group">
+        <label for="inputTarefa" class="col-xs-1 control-label">Nota</label>
+        <div class="col-md-8 col-xs-12">
+            <textarea rows="4" cols="50" maxlength="200" ng-model="tarefaControle.nota" required="">
+                Nova Nota
+            </textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-1 col-md-8 col-xs-12">
+            <input class="btn btn-primary" type="submit" value="add" />
+            <a class="btn btn-primary" ui-sref="categoria.lista({listaId:0})">Cancelar</a>
+        </div>
+    </div>
+</form>

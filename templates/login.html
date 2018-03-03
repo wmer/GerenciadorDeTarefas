@@ -1,0 +1,79 @@
+﻿<!-- Modal -->
+<!--login-->
+<div class="modal fade" id="loginTarefas" tabindex="-1" role="dialog" aria-labelledby="loginTarefasLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Gerenciador de Tarefas</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal login_estrut" name="loginForm" ng-submit="loginControle.login(loginControle.usuario, loginControle.senha)">
+                    <div class="form-group">
+                        <label for="inputuser" class="col-xs-2 control-label">Usuário</label>
+                        <div class="col-md-4 col-xs-12">
+                            <input type="text" class="form-control" id="inputuser" ng-model="loginControle.usuario" placeholder="Nome de Usuário" required="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputsenha" class="col-xs-2 control-label">Senha</label>
+                        <div class="col-md-4 col-xs-12">
+                            <input type="password" class="form-control" id="inputsenha" ng-model="loginControle.senha" placeholder="Senha" required="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-4 col-xs-12">
+                            <button type="submit" class="btn btn-default">Entrar</button>
+                        </div>
+                    </div>
+                    <p class="menLogi" data-toggle="modal" data-target="#novoUsuarioTarefas"><a href="#">Ou criar um novo usuário</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--fim login-->
+<!--Novo usuário-->
+<div class="modal fade" id="novoUsuarioTarefas" tabindex="-1" role="dialog" aria-labelledby="novoUsuarioTarefasLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Gerenciador de Tarefas</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal login_estrut" name="novoUsuarioForm" ng-submit="loginControle.novoUsuario(loginControle.usuario, loginControle.nome, loginControle.sobrenome, loginControle.senha)">
+                    <div class="form-group">
+                        <label for="inputuser" class="col-xs-2 control-label">Usuário</label>
+                        <div class="col-md-4 col-xs-12">
+                            <input type="text" class="form-control" id="inputuser" ng-model="loginControle.usuario" placeholder="Nome de Usuário" required="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputnome" class="col-xs-2 control-label">Nome</label>
+                        <div class="col-md-4 col-xs-12">
+                            <input type="text" class="form-control" id="inputnome" ng-model="loginControle.nome" placeholder="Nome" required="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputsobrenome" class="col-xs-2 control-label">Sobrenome</label>
+                        <div class="col-md-4 col-xs-12">
+                            <input type="text" class="form-control" id="inputsobrenome" ng-model="loginControle.sobrenome" placeholder="Sobrenome" required="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputsenha" class="col-xs-2 control-label">Senha</label>
+                        <div class="col-md-4 col-xs-12">
+                            <input type="password" class="form-control" id="inputsenha" ng-model="loginControle.senha" placeholder="Senha" required="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-4 col-xs-12">
+                            <button type="submit" class="btn btn-default">Entrar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--fim novo usuário-->
+<!--fim Modal-->

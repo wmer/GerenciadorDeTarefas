@@ -1,0 +1,83 @@
+﻿<div class="row">
+    <div class="col-md-8 col-xs-12">
+        <!--Filtro-->
+        <ul class="nav nav-pills todo-filter">
+            <li ng-class="{'active' : categoriaControle.show == 'All' }" ng-click="categoriaControle.show='All'"><a href="">Todas<span class="badge">{{categoriaControle.contadorTarefas().total}}</span></a></li>
+            <li ng-class="{'active' : categoriaControle.show == 'Incomplete' }" ng-click="categoriaControle.show='Incomplete'"><a href="">Incompletas<span class="badge">{{categoriaControle.contadorTarefas().restantes}}</span></a></li>
+            <li ng-class="{'active' : categoriaControle.show == 'Complete' }" ng-click="categoriaControle.show='Complete'"><a href="">Completas<span class="badge">{{categoriaControle.contadorTarefas().feitas}}</span></a></li>
+            <li ng-class="{'active' : categoriaControle.show == 'Delete' }" ng-click="categoriaControle.show='Delete'" ng-show="categoriaControle.contadorTarefas().deletadas > 0"><a href=""><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Deletadas<span class="badge">{{categoriaControle.contadorTarefas().deletadas}}</span></a></li>
+        </ul>
+        <button type="button" class="btnCon btn btn-primary" ng-click="categoriaControle.limpaFeitos()" ng-show="categoriaControle.show === 'Complete' && categoriaControle.contadorTarefas().feitas > 0"><i class="fa fa-times"></i> Limpar Feitos</button>
+        <button type="button" class="btnCon btn btn-primary" ng-click="categoriaControle.restauraTodos()" ng-show="categoriaControle.show === 'Delete'"><i class="fa fa-undo"></i> Restaurar todos</button>
+        <button type="button" class="btnCon btn btn-danger" ng-click="categoriaControle.apagaTodos()" ng-show="categoriaControle.show === 'Delete'"><i class="fa fa-trash"></i> Apagar Todos</button>
+        <!--fim Filtro-->
+    </div>
+</div>
+<!--Lista de Tarefas-->
+<div class="row">
+    <div class="col-md-10 col-xs-12">
+        <ul class="list-group" ng-repeat="minhatarefa in categoriaControle.user[categoriaControle.usuarioAtual].tarefas track by $index" ui-sortable="categoriaControle.reordena" ng-model="minhatarefa.minhatarefas" ng-show="$index === categoriaControle.currentShow">
+            <li class="list-group-item" ng-repeat="tarefa in minhatarefa.minhatarefas | filter:categoriaControle.showFn">
+                <label for="tarefas_feitas"></label>
+                <input type="checkbox" class="{{tarefa.prioridade}}" id="tarefas_feitas" ng-model="tarefa.feito" />
+                <span class="feito-{{tarefa.feito}}"><edit-in-place value="tarefa.tarefa"></edit-in-place></span> em <span class="categoria">{{tarefa.categoria}}</span>
+                <!--opções-->
+                <div class="dropdown pull-right">
+                    <button type="button" class="close dropdown-toggle" id="optTarefa" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" aria-hidden="true"><i class="fa fa-ellipsis-h"></i></button>
+                    <ul class="dropdown-menu" aria-labelledby="optTarefa">
+                        <li class="dropdown-header">Opções</li>
+                        <li role="separator" class="divider"></li>
+                        <li ng-show="categoriaControle.show !== 'Delete'"><a ui-sref="categoria.lista.Novanota({tarefaId:$index})"><i class="fa fa-pencil-square-o"></i> Adicionar Nota</a></li>
+                        <li ng-show="tarefa.notas.length > 0"><a href="" ng-click="categoriaControle.mostarComment = true; categoriaControle.commentShow = $index"><i class="fa fa-comments-o"></i> Exibir Notas <span class="badge">{{tarefa.notas.length}}</span></a></li>
+                        <li ng-show="categoriaControle.show === 'Delete'"><a href="" ng-click="categoriaControle.restauraLixeira(tarefa)"><i class="fa fa-undo"></i> Restaurar</a></li>
+                        <li ng-show="categoriaControle.show !== 'Delete'"><a href="" ng-click="categoriaControle.moverLixeira(tarefa)"><i class="fa fa-times"></i> Mandar pra Lixeira</a></li>
+                        <li><a href="" ng-click="categoriaControle.deletaTarefa(tarefa)"><i class="fa fa-trash"></i> Apagar</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li ng-show="categoriaControle.mover === false && categoriaControle.show !== 'Delete'"><a href="" ng-click="categoriaControle.mover = true; categoriaControle.dropShow = $index; categoriaControle.optCat()">Mover Para...</a></li>
+                    </ul>
+                </div>
+                <!--fim opções-->
+                <!--drop down para mover-->
+                <div class="list-group-item" ng-show="categoriaControle.mover === true && categoriaControle.dropShow === $index">
+                <div class="row">
+                    <form class="form-inline pull-right" role="form" name="moveCat" ng-submit="categoriaControle.moveTarefa($index, categoria)">
+                        <div class="form-group">
+                            <label for="move_cat">Mover {{tarefa.tarefa}} Para: </label>
+                            <select class="form-control catMove" id="move_cat" ng-model="categoria" ng-click="" required=""></select>
+                            <input class="btn btn-primary" type="submit" value="Mover" />
+                            <input class="btn btn-primary" aria-hidden="true" ng-click="categoriaControle.mover = false" type="button" value="Cancelar" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--fim drop dow para mover-->
+            <!--comentarios-->
+                <div class="list-group-item" ng-show="categoriaControle.mostarComment === true && categoriaControle.commentShow === $index">
+                    <md-content>
+                        <md-list>
+                            <md-list-item class="md-3-line" ng-repeat="nota in tarefa.notas track by $index">
+                                <button ng-click="categoriaControle.deletaNota(tarefa, $index)" type="button" class="close" aria-hidden="true"><i class="fa fa-trash"></i></button>
+                                <div class="md-list-item-text">
+                                    <h4>{{nota.criadoEm}}</h4>
+                                    <p>{{nota.nota}}</p>
+                                </div>
+                                <md-divider md-inset ng-if="!$last"></md-divider>
+                            </md-list-item>
+                        </md-list>
+                    </md-content>
+                </div>
+            <!--fim comentarios-->
+            </li>
+            <li class="tareVaz list-group-item" ng-show="categoriaControle.contadorTarefas().total === 0 && categoriaControle.show === 'All'">Não Há Tarefas.</li>
+            <li class="tareVaz list-group-item" ng-show="categoriaControle.contadorTarefas().restantes === 0 && categoriaControle.show === 'Incomplete'">Parabéns! Não há mais tarefas a se fazer.</li>
+            <li class="tareVaz list-group-item" ng-show="categoriaControle.contadorTarefas().feitas === 0 && categoriaControle.show === 'Complete'">Você ainda não fez nenhuma tarefa.</li>
+            <li class="tareVaz list-group-item" ng-show="categoriaControle.contadorTarefas().deletadas === 0 && categoriaControle.show === 'Delete'">A lixeira foi esvaziada!</li>
+        </ul>
+        <div ui-view="novaTare" class="slide"></div>
+        <a ui-sref="categoria.lista.tarefaNovo" class="nov_cat">
+            <span class="close pull-left" aria-hidden="true"><i class="fa fa-plus"></i></span>
+            Nova Tarefa
+        </a>
+    </div>
+</div>
+<!--fim lista de Tarefas-->

@@ -1,0 +1,65 @@
+﻿<div class="container-fluid">
+    <!--Navbar-->
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <!--titulo-->
+            <div class="navbar-header">
+                <a class="navbar-brand" ui-sref="home">Gerenciador de Tarefas</a>
+            </div>
+            <!--fim titulo-->
+            <!--links-->
+            <div>
+                <ul class="nav navbar-nav">
+                    <li><a href="" data-toggle="modal" data-target="#novaTarefaRapida">Tarefa Rapida</a></li>
+                    <li ng-show="tarefasControle.logado.detalhes.permisao === 'admin'"><a href="#">Todos os Usuários</a></li>
+                </ul>
+            </div>
+            <div>
+                <ul class="nav navbar-nav  pull-right">
+                    <!--dropdown-->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{tarefasControle.logado.usuarios}} <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" ng-click="tarefasControle.logOut(tarefasControle.usuarioAtual)">Sair</a></li>
+                        </ul>
+                    </li>
+                    <!--fim dropdown-->
+                </ul>
+            </div>
+            <!--fim links-->
+        </div>
+    </nav>
+    <!--fim navbar-->
+    <!--corpo site-->
+    <div class="row">
+        <div class="col-md-4">
+            <!--lista de categorias-->
+            <div class="list-group">
+                <a ui-sref="categoria.lista({listaId:$index})" ng-repeat="categoria in tarefasControle.user[tarefasControle.usuarioAtual].tarefas track by $index" class="list-group-item" ng-class="{'active' : tarefasControle.currentShow === $index}">
+                    <span class="close pull-right" aria-hidden="true" ng-click="tarefasControle.deletaCategoria($index)"><i class="fa fa-times"></i></span>
+                    {{categoria.categorias}}
+                </a>
+                <div class="slide" ui-view="novaCat">
+
+                </div>
+                <a ui-sref="categoria.novo" class="nov_cat">
+                    <span class="close pull-left" aria-hidden="true"><i class="fa fa-plus"></i></span>
+                    Nova Categoria
+                </a>
+            </div>
+            <!--fim lista de categorias-->
+        </div>
+        <div class="col-md-8 slide" ui-view>
+
+        </div>
+    </div>
+    <!--fim corpo site-->
+</div>
+
+<!--<div class="debug">
+    <p class="text-info">$stateParams.listaId: {{$stateParams.listaId}}</p>
+    <p class="text-info">currentShow: {{tarefasControle.currentShow}}</p>
+    <p class="text-info">Tarefas: {{tarefasControle.user[tarefasControle.usuarioAtual].tarefas[tarefasControle.currentShow].minhatarefas | json}}</p>
+    <p class="text-info">{{ tarefasControle.logado | json}}</p>
+    <p class="text-info">{{ tarefasControle.user | json}}</p>
+</div>-->
